@@ -1,4 +1,4 @@
-socket io chat app that resembles the twitch chat interface. displays usernames and 
+socket io chat app that resembles the twitch chat interface. displays usernames and each user gets to choose a color in which their name appears. 
 
 nodejs, express, socket  
 
