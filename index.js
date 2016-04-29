@@ -1,32 +1,3 @@
-// var app = require('express')();
-// var http = require('http').Server(app);
-// var io = require('socket.io')(http);
-// var nicknames =[];
-
-// app.get('/', function(req, res){
-//   res.sendFile(__dirname + '/index.html');
-// });
-
-// io.on('connection', function(socket) {
-// 	socket.on('new user', function(data, callback){
-// 		if(nicknames.indexOf(data) != -1) {
-// 			callback(false);
-// 		} else {
-// 			callback(true);
-// 			socket.nickname = data;
-// 			nickname.push(socket.nickname);
-// 			io.sockets.emit('username', nicknames);
-// 		}
-// 	});
-//   socket.on('chat message', function(msg){
-//     socket.broadcast.emit('chat message', msg);
-//   });
-// });
-
-// http.listen(3000, function(){
-//   console.log('listening on port:3000');
-// });
-
 var express = require('express'),
 	app = express(),
 	server = require('http').createServer(app),
