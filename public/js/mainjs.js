@@ -1,8 +1,9 @@
 jQuery(function($){
   var socket = io.connect();
-  var $nickForm = $('#setNick');
-  var $nickError = $('#nickError');
+  var $setName = $('#setName');
+  var $nameError = $('#nameError');
   var $nickBox = $('#nickname');
+  var $colorBox = $('#color');
   var $users = $('#users');
   var $messageForm = $('#send-message');
   var $messageBox = $('#message');
@@ -20,17 +21,18 @@ jQuery(function($){
     $("#content").height($(document).height());
   });
 
-  $nickForm.submit(function(e){
+  $setName.submit(function(e){
     e.preventDefault();
-    socket.emit('new user', $nickBox.val(), function(data){
+    socket.emit('new user', $nickBox.val(), $colorBox.val(), function(data){
       if(data){
-        $('#nickWrap').hide();
+        $('#enterName').hide();
         $('#content').show();
       } else{
-        $nickError.html('That username is already taken!  Try again.');
+        $nameError.html('That username is already taken!  Try again.');
       }
     });
     $nickBox.val('');
+    $colorBox.val('');
   });
 
   socket.on('usernames', function(data){
@@ -48,6 +50,6 @@ jQuery(function($){
   });
 
   socket.on('new message', function(data){
-    $('#messages').append($('<li>' + '<b>' + data.nick + ': </b>' + data.msg + '</li>'));
+    $('#messages').append($('<li>' + '<span style="color: ' + data.color + '; font-weight: 600">' + data.nick + ': </span>' + data.msg + '</li>'));
   });
 });

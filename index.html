@@ -8,11 +8,13 @@
 
   <body>
 
-  <div id="nickWrap">
+  <div id="enterName">
     <h3 class="margin-left: 120px;">Enter A Username</h3>
-    <p id="nickError"></p>
-    <form id="setNick" class="signup" >
-      <input id="nickname" /><button class="signup-button">Submit</button>
+    <p id="nameError"></p>
+    <form id="setName" class="signup" >
+      <input id="nickname" />
+      <input id="color" />
+      <button class="signup-button">Submit</button>
     </form>
   </div>
 
@@ -21,8 +23,7 @@
         <ul id="messages"></ul>
       </div>
     <div class="chatArea">
-      <form id="send-message" class="chatTime">
-        <!-- <input id="message"><button>Send</button> -->   
+      <form id="send-message" class="chatTime">  
         <textarea id="message" placeholder="Send Message"></textarea>
         <i class="fa fa-smile-o smile" aria-hidden="true"></i>
         <div style="margin-top: 10px">

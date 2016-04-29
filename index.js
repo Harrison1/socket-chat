@@ -42,12 +42,14 @@ app.get('/', function(req, res){
 app.use(express.static('public'));
 
 io.sockets.on('connection', function(socket){
-	socket.on('new user', function(data, callback){
+	socket.on('new user', function(data, color, callback){
 		if (nicknames.indexOf(data) != -1){
 			callback(false);
-		} else{
+		} else {
 			callback(true);
 			socket.nickname = data;
+			socket.color = color;
+			console.log(socket.color);
 			nicknames.push(socket.nickname);
 			updateNicknames();
 		}
@@ -57,8 +59,8 @@ io.sockets.on('connection', function(socket){
 		io.sockets.emit('usernames', nicknames);
 	}
 
-	socket.on('send message', function(data){
-		io.sockets.emit('new message', {msg: data, nick: socket.nickname});
+	socket.on('send message', function(data) {
+		io.sockets.emit('new message', {msg: data, nick: socket.nickname, color: socket.color });
 	});
 	
 	socket.on('disconnect', function(data){
