@@ -89,7 +89,7 @@ font-style: italic;
 
 .gear {
 float: left; 
-color: #6441a5
+color: #6441a5;
 }
 
 .list {
@@ -102,6 +102,8 @@ margin-left: 20px;
 margin-left: 360px;
 border-left: 2px solid purple;
 padding-left: 6px;
+font-size: 18px;
+display: none;
 }
 
 .smile {
@@ -118,3 +120,10 @@ margin-left: 60px;
 .enterName {
 margin-left: 120px;
 }
+
+select {
+width: 100px;
+height: 40px;
+border: 2px solid #6441a5;
+font-size: 16px;
+}    

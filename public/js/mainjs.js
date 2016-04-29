@@ -3,7 +3,7 @@ jQuery(function($){
   var $setName = $('#setName');
   var $nameError = $('#nameError');
   var $nickBox = $('#nickname');
-  var $colorBox = $('#color');
+  var $colorBox = $('#colors');
   var $users = $('#users');
   var $messageForm = $('#send-message');
   var $messageBox = $('#message');
@@ -27,6 +27,7 @@ jQuery(function($){
       if(data){
         $('#enterName').hide();
         $('#content').show();
+        $('#users').show();
       } else{
         $nameError.html('That username is already taken!  Try again.');
       }
