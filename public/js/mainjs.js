@@ -37,11 +37,12 @@ jQuery(function($){
   });
 
   socket.on('usernames', function(data){
-    var html = '';
+    var names = '';
+    var i;
     for(i=0; i < data.length; i++){
-      html += data[i] + '<br/>'
+      names += data[i] + '<br/>'
     }
-    $users.html(html);
+    $users.html(names);
   });
 
   $messageForm.submit(function(e){

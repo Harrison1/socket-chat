@@ -13,6 +13,8 @@ app.get('/', function(req, res){
 });
 
 app.use(express.static('public'));
+app.use(express.static('js'));
+
 
 io.sockets.on('connection', function(socket){
 	socket.on('new user', function(data, color, callback){
@@ -22,7 +24,6 @@ io.sockets.on('connection', function(socket){
 			callback(true);
 			socket.nickname = data;
 			socket.color = color;
-			console.log(socket.color);
 			nicknames.push(socket.nickname);
 			updateNicknames();
 		}

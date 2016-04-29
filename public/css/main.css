@@ -50,9 +50,10 @@ border-radius: 10px;
 }
 
 .signup-button { 
-width: 25.5%; 
+width: 100px; 
 color: #fff; 
-border-radius: 10px; 
+border-radius: 10px;
+margin-left: 10px; 
 }
 
 .chatTime { 
@@ -108,8 +109,8 @@ display: none;
 
 .smile {
 position: absolute;
-margin-top: -45px;
-margin-left: 280px;
+margin-top: 10px;
+margin-left: -20px;
 color: grey;
 }
 
@@ -126,4 +127,9 @@ width: 100px;
 height: 40px;
 border: 2px solid #6441a5;
 font-size: 16px;
+margin-left: 10px;
 }    
+
+.icons-margin {
+	margin-top: 10px;
+}
