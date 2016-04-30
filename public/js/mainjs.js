@@ -47,11 +47,17 @@ jQuery(function($){
 
   $messageForm.submit(function(e){
     e.preventDefault();
-    socket.emit('send message', $messageBox.val());
+    socket.emit('send message', $messageBox.val(), function(data){
+      $('#messages').append('<span style="color: red; font-weight: 600">' + data + ': </span><br>');
+    });
     $messageBox.val('');
   });
 
   socket.on('new message', function(data){
     $('#messages').append($('<li>' + '<span style="color: ' + data.color + '; font-weight: 600">' + data.nick + ': </span>' + data.msg + '</li>'));
+  });
+
+  socket.on('whisper', function(data) {
+      $('#messages').append('<span style="color: grey; font-weight: 400; font-style: italic">' + data.nick + ': </span>' + data.msg);
   });
 });
