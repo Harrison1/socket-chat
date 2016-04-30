@@ -2,10 +2,25 @@ var express = require('express'),
 	app = express(),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
+	mongoose = require('mongoose');
 	users = {};
 	
 server.listen(3000, function(){
   console.log('listening on port:3000');
+});
+
+mongoose.connect('mongodb://localhost/chat', function(err) {
+	if (err) {
+		console.log(err);
+	} else {
+		console.log('Connected to mongodb successful');
+	}
+});
+
+var chatSchema = mongoose.Schema({
+	nick: String,
+	msg: String,
+	date: {type: Date, default: Date.now} 
 });
 
 app.get('/', function(req, res){
