@@ -20275,12 +20275,22 @@
 	    $messageBox.val('');
 	  });
 
+	  function displayMessages(data) {
+	    $('#messages').append($('<li>' + '<span style="color: ' + data.color + '; font-weight: 600">' + data.name + ': </span>' + data.msg + '</li>'));
+	  }
+
+	  socket.on('load old msgs', function (docs) {
+	    for (var i = 0; i < docs.length; i++) {
+	      displayMessages(docs[i]);
+	    }
+	  });
+
 	  socket.on('new message', function (data) {
-	    $('#messages').append($('<li>' + '<span style="color: ' + data.color + '; font-weight: 600">' + data.nick + ': </span>' + data.msg + '</li>'));
+	    displayMessages(data);
 	  });
 
 	  socket.on('whisper', function (data) {
-	    $('#messages').append('<span style="color: grey; font-weight: 400; font-style: italic">' + data.nick + ': </span>' + data.msg);
+	    $('#messages').append('<span style="color: grey; font-weight: 400; font-style: italic">' + data.name + ': </span>' + data.msg);
 	  });
 	});
 

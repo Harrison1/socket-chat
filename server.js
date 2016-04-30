@@ -18,10 +18,13 @@ mongoose.connect('mongodb://localhost/chat', function(err) {
 });
 
 var chatSchema = mongoose.Schema({
-	nick: String,
+	name: String,
 	msg: String,
+	color: String,
 	date: {type: Date, default: Date.now} 
 });
+
+var Chat = mongoose.model('Message', chatSchema);
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
@@ -31,7 +34,16 @@ app.use(express.static('public'));
 app.use(express.static('js'));
 
 
-io.sockets.on('connection', function(socket){
+io.sockets.on('connection', function(socket) {
+	
+	Chat.find({}, function(err, docs) {
+		if(err) {
+			throw err;
+		} else {
+			socket.emit('load old msgs', docs);
+		}
+	});
+
 	socket.on('new user', function(data, color, callback){
 		if (data in users){
 			callback(false);
@@ -57,7 +69,7 @@ io.sockets.on('connection', function(socket){
 				var name = msg.substr(0, ind);
 				var msg = msg.substr(ind + 1);
 				if(name in users) {
-					users[name].emit('whisper', {msg: msg, nick: socket.nickname, color: socket.color })
+					users[name].emit('whisper', {msg: msg, name: socket.nickname, color: socket.color })
 					console.log('whisper');
 				} else {
 					callback('Error! enter a valid user');
@@ -66,7 +78,14 @@ io.sockets.on('connection', function(socket){
 				callback('Error! please enter message for private chat');
 			}
 		} else {
-			io.sockets.emit('new message', {msg: msg, nick: socket.nickname, color: socket.color });
+			var newMsg = new Chat({msg: msg, name: socket.nickname, color: socket.color});
+			newMsg.save(function(err) {
+				if(err) {
+					throw err;
+				} else {
+					io.sockets.emit('new message', {msg: msg, name: socket.nickname, color: socket.color });
+				}
+			});
 		}
 	});
 	
