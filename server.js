@@ -35,8 +35,8 @@ app.use(express.static('js'));
 
 
 io.sockets.on('connection', function(socket) {
-	
-	Chat.find({}, function(err, docs) {
+	var query = Chat.find();
+	query.sort('-date').limit(8).exec(function(err, docs) {
 		if(err) {
 			throw err;
 		} else {

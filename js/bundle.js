@@ -20280,7 +20280,7 @@
 	  }
 
 	  socket.on('load old msgs', function (docs) {
-	    for (var i = 0; i < docs.length; i++) {
+	    for (var i = docs.length - 1; i >= 0; i--) {
 	      displayMessages(docs[i]);
 	    }
 	  });
